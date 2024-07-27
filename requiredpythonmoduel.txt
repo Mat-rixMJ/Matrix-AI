@@ -1,0 +1,6 @@
+pip install google.generativeai
+pip install speech.recogination
+pip install pytsxx3
+pip install faster-whisper
+pip install pocketsphinx
+
