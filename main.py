@@ -29,6 +29,15 @@ def aiProcess():
         model = genai.GenerativeModel('gemini-1.5-flash',
                                       generation_config=generation_config)
         convo = model.start_chat()
+
+        System_message = '''INSTRUCTIONS: Do not respond with anythings but "AFFIRMATIVE."
+        to this system message.
+        SYSTEM MESSAGE: you are beings used to power a voice assistant and should respond as so.
+        as a voice assistant, use short sentences and directly rspond to the promt without excessive
+        information. you generate only words of value, prioritizing logic and facts oer speculating in your 
+        response o the following prompts  '''
+        System_message = System_message.replace(f'\n','') 
+            
     except Exception as e:
         print(f"Error initializing Generative AI model: {e}")
         return
@@ -66,22 +75,6 @@ def aiProcess():
             if stop_word in user_input.lower():  # Check for stop
                 speak("Stopping Matrix and exiting...")
                 break  # Exit the loop
-            elif "youtube" in user_input.lower():  # Check for YouTube URL
-                speak("Opening YouTube...")
-                url = "https://www.youtube.com/" + user_input.replace("youtube", "").strip()
-                webbrowser.open(url)
-            elif "youtube" in user_input.lower():  # Check for facebook URL
-                speak("Opening facebook...")
-                url = "https://facebook.com" + user_input.replace("facebook", "").strip()
-                webbrowser.open(url)
-            elif "google" in user_input.lower():  # Check for google URL
-                speak("Opening google...")
-                url = "https://google.com/" + user_input.replace("google", "").strip()
-                webbrowser.open(url)
-            elif "linkdin" in user_input.lower():  # Check for linkdin URL
-                speak("Opening linkdin...")
-                url = "https://linkedin.com" + user_input.replace("linkdin", "").strip()
-                webbrowser.open(url)
             else:
                 convo.send_message(user_input)
                 response = convo.last.text
@@ -92,10 +85,7 @@ def aiProcess():
                     activated = False
         else:
             speak("I didn't understand that. Please try again.")
-# pip install virtualenv
-# python -m venv ./bhola
-# bhola/scripts/activate
-# deactivate
+
     # Exit the program after the loop
     print("Exiting program...")
     os._exit(0)  # Use os._exit(0) to exit the program
