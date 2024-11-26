@@ -15,7 +15,7 @@ def speak(text):
     engine.runAndWait()
 
 def aiProcess():
-    API_KEY = "AIzaSyC90eDWN8moA9PgOFG4yGEBy1JX0GXE2Go"
+    API_KEY = "API key ....."
     genai.configure(api_key=API_KEY)
 
     generation_config = {
